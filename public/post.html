@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário CRUD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <h1>POST - Criar Nova Pessoa</h1>
+        <label>Nome:</label>
+        <input type="text" id="nomeCriar"><br><br>
+        <label>Idade:</label>
+        <input type="text" id="idadeCriar"><br><br>
+        <label>CPF:</label>
+        <input type="text" id="cpfCriar" placeholder="Digite o CPF"><br><br>
+        <input type="button" onclick="criarPessoa()" value="Criar Nova Pessoa">
+        <br><br>
+    </center>
+
+    <script>
+        // Função para criar uma nova pessoa
+        function criarPessoa() {
+            const nome = document.getElementById('nomeCriar').value;
+            const idade = document.getElementById('idadeCriar').value;
+            const cpf = document.getElementById('cpfCriar').value;
+
+            // Verificação de campos vazios
+            if (!nome || !idade || !cpf) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+
+            // Requisição POST para criar nova pessoa
+            fetch('http://localhost:3000/pessoas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome: nome, idade: idade, cpf: cpf })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Falha ao criar pessoa');
+                }
+            })
+            .then(data => {
+                alert('Pessoa criada com sucesso!');
+                // Limpar os campos após criação
+                document.getElementById('nomeCriar').value = '';
+                document.getElementById('idadeCriar').value = '';
+                document.getElementById('cpfCriar').value = '';
+            })
+            .catch(error => {
+                console.error('Erro ao criar pessoa:', error);
+                alert('Erro ao criar a pessoa!');
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETE - Deletar Dados</title>
+    <link rel="stylesheet" href="delete.css">
+</head>
+<body>
+    <h1>DELETE - Deletar Dados</h1>
+    
+    <label>CPF:</label>
+    <input type="text" id="cpfDeletar">
+    <input type="button" onclick="deletarDados()" value="Deletar Dados"><br><br>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>CPF</th>
+            <th>DELET</th>
+        </tr>
+        <tbody id="tabela-corpo"></tbody>
+    </table>
+
+    <script>
+     // Função DELETE - Deletar dados
+     function deletarDados() {
+        const cpf = document.getElementById('cpfDeletar').value;
+
+        fetch(`http://localhost:3000/pessoas?cpf=${cpf}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                const id = data[0].id;
+                fetch(`http://localhost:3000/pessoas/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(() => {
+                    alert('Pessoa deletada com sucesso!');
+                    carregarTabela(); // Recarrega a tabela de pessoas após deleção
+                })
+                .catch(error => {
+                    alert('Erro ao deletar pessoa: ' + error.message);
+                });
+            } else {
+                alert('Pessoa não encontrada!');
+            }
+        });
+    }
+
+    // Função para carregar a tabela de pessoas cadastradas
+    function carregarTabela() {
+        fetch('http://localhost:3000/pessoas')
+        .then(response => response.json())
+        .then(data => {
+            const tabelaCorpo = document.getElementById('tabela-corpo');
+            tabelaCorpo.innerHTML = ''; // Limpa a tabela antes de adicionar as novas linhas
+
+            data.forEach(pessoa => {
+                const linha = `<tr>
+                    <td>${pessoa.id}</td>
+                    <td>${pessoa.nome}</td>
+                    <td>${pessoa.idade}</td>
+                    <td>${pessoa.cpf}</td>
+                    <td>
+                        <button onclick="deletarPessoa(${pessoa.id})">Deletar</button>
+                    </td>
+                </tr>`;
+                tabelaCorpo.innerHTML += linha;
+            });
+        });
+    }
+
+    // Função para deletar uma pessoa pelo ID e recarregar a tabela
+    function deletarPessoa(id) {
+        fetch(`http://localhost:3000/pessoas/${id}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            alert('Pessoa deletada com sucesso!');
+            carregarTabela(); // Recarrega a tabela após a exclusão
+        })
+        .catch(error => {
+            alert('Erro ao deletar pessoa: ' + error.message);
+        });
+    }
+
+    // Chama a função de carregar a tabela quando a página é carregada
+    window.onload = carregarTabela;
+</script>
+<br><br>
+<button> <a class="link" href="index.html">Voltar</a></button>
+</body>
+</html

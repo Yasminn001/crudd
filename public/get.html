@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+    <h3>GET - Buscar Pessoa</h3>
+        <label>CPF:</label>
+        <input type="text" id="cpfBuscar">
+        <input type="button" onclick="buscarDados()" value="Buscar">
+        <br><br>
+
+    <script>
+        function buscarDados() {
+            const cpf = document.getElementById('cpfBuscar').value;
+            fetch(`http://localhost:3000/pessoas?cpf=${cpf}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    alert(`Pessoa encontrada: ${data[0].nome}, ${data[0].idade} anos, CPF: ${data[0].cpf}`);
+                } else {
+                    alert('Pessoa não encontrada!');
+                }
+            });
+        }
+    
+    </script>
+    <button> <a class="link" href="delete.html">DELETE</a></button>
+</center>
+</body>
+</html>

@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos para o corpo da página */
+body {
+    background-image:url(img/fundo.jfif) ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna */
+    color: #fff; /* Cor do texto branca */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container centralizado */
+.container {
+    background-color: #1e3b8a3d; /* Fundo branco para o conteúdo */
+    color: #333; /* Cor do texto dentro da caixa */
+    padding: 40px 60px; /* Padding maior para mais espaço */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 800px; /* Largura máxima para a caixa */
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5rem; /* Tamanho maior para o título */
+    margin-bottom: 40px;
+    color: #ffffff; /* Cor do título azul */
+}
+
+/* Caixa de links */
+.link-box {
+    background-color: #f4f4f9; /* Cor clara para as caixas de link */
+    border-radius: 10px; /* Bordas arredondadas nas caixas */
+    margin: 15px 0; /* Espaçamento entre as caixas */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave nas caixas */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Estilo para o título dentro de cada caixa */
+.link-box h2 {
+    font-size: 1.5rem; /* Tamanho maior para o título da caixa */
+    color: #1E3A8A; /* Cor azul para o título da caixa */
+    margin-bottom: 15px;
+}
+
+/* Estilo para os links dentro das caixas */
+.link-box a {
+    color: #1E3A8A; /* Cor azul para os links */
+    text-decoration: none; /* Remove o sublinhado */
+    font-size: 1.2rem; /* Tamanho do texto dos links */
+    display: block; /* Faz os links ficarem em blocos */
+    margin: 10px 0; /* Espaçamento entre os links */
+    padding: 10px;
+    border-radius: 5px; /* Bordas arredondadas nos links */
+    border: 2px solid transparent; /* Borda transparente por padrão */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+/* Efeito de hover nas caixas */
+.link-box:hover {
+    transform: translateY(-5px); /* Leve elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra mais intensa */
+}
+
+/* Efeito de hover nos links dentro das caixas */
+.link-box a:hover {
+    background-color: #1E3A8A; /* Fundo azul escuro ao passar o mouse */
+    color: #fff; /* Cor branca no texto do link */
+    border-color: #1E3A8A; /* Borda azul */
+}
+
+/* Estilos de responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 40px; /* Reduz o padding em telas menores */
+    }
+
+    h1 {
+        font-size: 2rem; /* Tamanho do título reduzido */
+    }
+
+    .link-box h2 {
+        font-size: 1.3rem; /* Tamanho do título das caixas reduzido */
+    }
+
+    .link-box a {
+        font-size: 1rem; /* Tamanho dos links reduzido */
+    }
+}
